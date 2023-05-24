@@ -23,6 +23,7 @@ const GameSearch: React.FC = () => {
           headers: {
             "Client-ID": "8l6p4sfo8pyuwpoc2ki4ncbbjyrcw2",
             Authorization: "Bearer hyfx0bh9p03ts1vo06hslw7xuptok1",
+            "Accept-Language": "ja",
           },
         }
       );
