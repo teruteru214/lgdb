@@ -45,7 +45,9 @@ const GameSearch: React.FC = () => {
         {gameCovers.map((game) => (
           <div key={game.id}>
             <h3>{game.name}</h3>
-            <img src={game.cover.url} alt="Game Cover" />
+            {game.cover && game.cover.url && (
+              <img src={game.cover.url} alt="Game Cover" />
+            )}
           </div>
         ))}
       </div>
