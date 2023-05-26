@@ -42,14 +42,14 @@ const GameSearch: React.FC = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <div>
-        {gameCovers.map((game) => (
-          <div key={game.id}>
-            <h3>{game.name}</h3>
-            {game.cover && game.cover.url && (
+        {gameCovers
+          .filter((game) => game.cover && game.cover.url) // カバー画像が存在するゲームのみフィルタリング
+          .map((game) => (
+            <div key={game.id}>
+              <h3>{game.name}</h3>
               <img src={game.cover.url} alt="Game Cover" />
-            )}
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
     </div>
   );
