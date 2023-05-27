@@ -8,17 +8,25 @@ interface Game {
     id: number;
     url: string;
   };
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  platforms: {
+    id: number;
+    name: string;
+  }[];
 }
 
 const GameSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [gameCovers, setGameCovers] = useState<Game[]>([]);
+  const [gameResults, setGameResults] = useState<Game[]>([]);
 
   const handleSearch = async () => {
     try {
       const response = await axios.post<Game[]>(
         "https://api.igdb.com/v4/games",
-        `fields id, name, cover.url; limit 28; search "${searchQuery}";`,
+        `fields id, name, cover.url, genres.name, platforms.name; limit 28; search "${searchQuery}";`,
         {
           headers: {
             "Client-ID": "8l6p4sfo8pyuwpoc2ki4ncbbjyrcw2",
@@ -27,7 +35,7 @@ const GameSearch: React.FC = () => {
           },
         }
       );
-      setGameCovers(response.data);
+      setGameResults(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -42,14 +50,23 @@ const GameSearch: React.FC = () => {
       />
       <button onClick={handleSearch}>Search</button>
       <div>
-        {gameCovers
-          .filter((game) => game.cover && game.cover.url) // カバー画像が存在するゲームのみフィルタリング
-          .map((game) => (
-            <div key={game.id}>
-              <h3>{game.name}</h3>
+        {gameResults.map((game) => (
+          <div key={game.id}>
+            <h3>{game.name}</h3>
+            {game.genres && (
+              <p>Genre: {game.genres.map((genre) => genre.name).join(", ")}</p>
+            )}
+            {game.platforms && (
+              <p>
+                Platform:{" "}
+                {game.platforms.map((platform) => platform.name).join(", ")}
+              </p>
+            )}
+            {game.cover && game.cover.url && (
               <img src={game.cover.url} alt="Game Cover" />
-            </div>
-          ))}
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
