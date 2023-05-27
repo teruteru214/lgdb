@@ -64,7 +64,7 @@ const GameSearch: React.FC = () => {
             )}
             {game.cover && game.cover.url && (
               <img
-                src={`${game.cover.url}&quality=500`}
+                src={`${game.cover.url.replace("thumb", "cover_big")}`}
                 alt="Game Cover"
                 style={{ width: "300px", height: "auto" }}
               />
