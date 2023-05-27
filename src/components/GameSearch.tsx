@@ -63,7 +63,11 @@ const GameSearch: React.FC = () => {
               </p>
             )}
             {game.cover && game.cover.url && (
-              <img src={game.cover.url} alt="Game Cover" />
+              <img
+                src={game.cover.url}
+                alt="Game Cover"
+                style={{ width: "300px", height: "auto" }}
+              />
             )}
           </div>
         ))}
