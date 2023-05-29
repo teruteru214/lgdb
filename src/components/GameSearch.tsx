@@ -16,6 +16,7 @@ interface Game {
     id: number;
     name: string;
   }[];
+  url: string; // Added URL property
 }
 
 const GameSearch: React.FC = () => {
@@ -26,7 +27,7 @@ const GameSearch: React.FC = () => {
     try {
       const response = await axios.post<Game[]>(
         "https://api.igdb.com/v4/games",
-        `fields id, name, cover.url, genres.name, platforms.name; limit 28; search "${searchQuery}";`,
+        `fields id, name, cover.url, genres.name, platforms.name, url; limit 28; search "${searchQuery}";`,
         {
           headers: {
             "Client-ID": "8l6p4sfo8pyuwpoc2ki4ncbbjyrcw2",
@@ -35,7 +36,11 @@ const GameSearch: React.FC = () => {
           },
         }
       );
-      setGameResults(response.data);
+      const resultsWithUrl = response.data.map((game) => ({
+        ...game,
+        url: `https://www.igdb.com/games/${game.id}`,
+      }));
+      setGameResults(resultsWithUrl);
     } catch (error) {
       console.error(error);
     }
@@ -68,6 +73,13 @@ const GameSearch: React.FC = () => {
                 alt="Game Cover"
                 style={{ width: "300px", height: "auto" }}
               />
+            )}
+            {game.url && (
+              <p>
+                <a href={game.url} target="_blank" rel="noopener noreferrer">
+                  IGDB Link
+                </a>
+              </p>
             )}
           </div>
         ))}
