@@ -38,7 +38,7 @@ const GameSearch: React.FC = () => {
       );
       const resultsWithUrl = response.data.map((game) => ({
         ...game,
-        url: `https://www.igdb.com/games/${game.id}`,
+        url: game.url,
       }));
       setGameResults(resultsWithUrl);
     } catch (error) {
