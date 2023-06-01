@@ -76,7 +76,11 @@ const GameSearch: React.FC = () => {
             )}
             {game.url && (
               <p>
-                <a href={game.url} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={`http://${game.url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   IGDB Link
                 </a>
               </p>
