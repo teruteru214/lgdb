@@ -27,7 +27,7 @@ const GameSearch: React.FC = () => {
   const handleSearch = async () => {
     try {
       const response = await axios.post<Game[]>(
-        "https://api.igdb.com/v4/games",
+        "/v4/games",
         `fields id, name, cover.url, genres.name, platforms.name, url, rating; limit 28; search "${searchQuery}";`,
         {
           headers: {
