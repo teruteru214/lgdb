@@ -28,11 +28,11 @@ const GameSearch: React.FC = () => {
     try {
       const response = await axios.post<Game[]>(
         "https://api.igdb.com/v4/games",
-        `fields id, name, cover.url, genres.name, platforms.name, url, rating; limit 28; search "${searchQuery}";`,
+        `fields id, name, cover.url, genres.name, platforms.name, url, rating; limit 150; search "${searchQuery}";`,
         {
           headers: {
             "Client-ID": "8l6p4sfo8pyuwpoc2ki4ncbbjyrcw2",
-            Authorization: "Bearer hyfx0bh9p03ts1vo06hslw7xuptok1",
+            Authorization: "Bearer h5ck7192647pfg7nad3ln4xpnjhcda",
             "Accept-Language": "ja",
           },
         }
